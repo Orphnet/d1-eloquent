@@ -1,0 +1,71 @@
+# @orphnet/d1-eloquent
+
+> Type-safe, Eloquent-style ORM for Cloudflare D1, built for Workers. Models,
+> migrations, query builder, relationships, soft deletes, revision tracking,
+> attribute casting, accessors/mutators, dynamic models, seeders/factories, and
+> a zero-config CLI. Source lives in `d1Eloquent/` (runtime) and `scripts/`
+> (CLI/migrations); `src/` is the public export barrel.
+
+For agents: read `AGENT_SNIPPET.md` first (working without full source), then
+`docs/API.md` (one-page cheatsheet). For runtime/type traps that `tsc` does not
+catch, read `docs/troubleshooting.md`. The CLI binding is auto-detected from
+`wrangler.jsonc`; use bun/bunx and never pass `--db`, `--local`, or `--remote`.
+
+## Start here
+
+- [Agent quick guide](AGENT_SNIPPET.md): condensed model + configure + CRUD + query + CLI reference.
+- [API cheatsheet](docs/API.md): consolidated base-model / query-builder / schema-builder / relations / configure.
+- [Troubleshooting](docs/troubleshooting.md): fillable/id create trap, casts widening (TS2417), circular-ESM relations.
+- [README](README.md): overview, install (bun add @orphnet/d1-eloquent), setup, CRUD, relationships.
+
+## API reference
+
+- [BaseModel](docs/api/base-model.md): static config, CRUD, instance methods, hooks, scopes, exceptions.
+- [QueryBuilder](docs/api/query-builder.md): filters, shape, terminals, mutations, pagination, Collection.
+- [Schema builder](docs/api/schema-builder.md): createTable / table / columns / modifiers / foreign keys.
+- [Relationships](docs/api/relationships.md): declarative relations, has/whereHas, eager loading, pivots.
+
+## Guides
+
+- [Configuration](docs/guide/configuration.md): configure(env), binding detection, multi-DB, test setup.
+- [Casting](docs/guide/casting.md): built-in casts, timestamps, custom casts, null handling.
+- [Quick start](docs/guide/quick-start.md): first model + migration + query.
+- [Installation](docs/guide/installation.md): package + @cloudflare/workers-types setup.
+- [Migrations](docs/guide/migrations.md): writing and running migrations.
+- [Seeders & factories](docs/guide/seeders-factories.md): factories, fake data, structured output.
+- [Soft deletes](docs/guide/soft-deletes.md): deleted_at, withTrashed/onlyTrashed, restore.
+- [Revisions](docs/guide/revisions.md): audit log, asOf/revertTo time-travel.
+- [Transactions](docs/guide/transactions.md): transaction(db, tx => ...) atomic unit-of-work via db.batch().
+- [Accessors & mutators](docs/guide/accessors-mutators.md): computed attributes, proxy access, fan-out.
+- [JSON aggregates & updates](docs/guide/json-aggregates-updates.md): whereJsonPath/Contains/Length, json1.
+- [Polymorphic many-to-many](docs/guide/polymorphic-many-to-many.md): morphToMany / morphedByMany.
+- [KV cache](docs/guide/kv-cache.md): KvCacheAdapter integration.
+- [Tinker](docs/guide/tinker.md): interactive local REPL.
+
+## CLI
+
+- [Generators](docs/cli/generators.md): make:migration / make:model / make:resource / make:dto / make:types.
+- [migrate](docs/cli/migrate.md): run pending migrations (+ status).
+- [rollback](docs/cli/rollback.md): roll back the last batch.
+- [fresh](docs/cli/fresh.md): drop all tables and re-run (FK-safe order).
+- [seed](docs/cli/seed.md): run seeders.
+- [validate](docs/cli/validate.md): validate models/migrations.
+- [inspect](docs/cli/inspect.md): inspect schema/models.
+
+## Optional
+
+- [Source: d1Eloquent/](d1Eloquent/): runtime ORM (baseModel, queryBuilder, castManager, managers/…, relationTypes).
+- [Source: scripts/](scripts/): CLI, schema builder, factories, seed output, command implementations.
+- [Source: src/](src/): public export barrels (index.ts, cli-exports.ts, config.ts, bin.ts).
+
+## Ignore (do not index — generated, machine, or noise)
+
+- `dist/` — bundled/minified build output (`*.js`, `*.map`, `*.d.ts`).
+- `docs/.vitepress/` — generated site (`dist/` HTML, `cache/`, theme assets).
+- `docs/public/` — fonts and brand assets (binary).
+- `release/` — marketing/announcement posts, not docs.
+- `coverage/` — coverage reports.
+- `test-results.json` — machine-readable test output.
+- `node_modules/`, `.wrangler/`, `.planning/`, `plans/`, `.remember/`, `.claude/`, `.idea/`.
+- `CHANGELOG.md` — version chatter pollutes how-do-I queries.
+- `**/*.test.ts` — contract tests are useful for `prefer:tests` but are noise for prose lookups.

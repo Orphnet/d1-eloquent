@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://d1-eloquent.orph.dev
+    about: API reference, feature guides, and an interactive SQL playground.
+  - name: 🔒 Report a security vulnerability
+    url: https://github.com/Orphnet/d1-eloquent/security/advisories/new
+    about: Please report vulnerabilities privately, not as public issues.

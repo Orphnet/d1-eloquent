@@ -1,0 +1,87 @@
+{
+  "name": "@orphnet/d1-eloquent",
+  "version": "0.1.0-beta.1",
+  "description": "Type-safe, expressive ORM for Cloudflare D1 with soft deletes, revisions, and migrations",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./cli": {
+      "types": "./dist/cli-exports.d.ts",
+      "import": "./dist/cli-exports.js"
+    },
+    "./config": {
+      "types": "./dist/config.d.ts",
+      "import": "./dist/config.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "d1-eloquent": "./dist/bin.js"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "llms.txt",
+    "AGENT_SNIPPET.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "check": "publint && attw --pack . --ignore-rules cjs-resolves-to-esm no-resolution",
+    "prepublishOnly": "bun run build && bun run check",
+    "test": "vitest run",
+    "test:cli": "vitest run --config vitest.cli.config.ts",
+    "test:all": "vitest run && vitest run --config vitest.cli.config.ts",
+    "test:coverage": "vitest run --coverage",
+    "test:stats": "bun scripts/update-readme-stats.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Orphnet/d1-eloquent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Orphnet/d1-eloquent/issues"
+  },
+  "homepage": "https://github.com/Orphnet/d1-eloquent#readme",
+  "keywords": [
+    "cloudflare",
+    "d1",
+    "orm",
+    "sqlite",
+    "workers",
+    "eloquent"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "peerDependencies": {
+    "@cloudflare/workers-types": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@cloudflare/workers-types": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@cloudflare/vitest-pool-workers": "^0.12.18",
+    "@cloudflare/workers-types": "^4.20260301.1",
+    "@types/node": "^22.0.0",
+    "@vitest/coverage-istanbul": "3.1.4",
+    "@vitest/runner": "3.1.4",
+    "@vitest/snapshot": "3.1.4",
+    "publint": "^0.3.18",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.6"
+  }
+}

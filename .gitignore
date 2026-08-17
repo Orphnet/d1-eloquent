@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local env
+.dev.vars
+
+# Wrangler local state
+.wrangler/
+
+# Claude Code / internal working notes
+.claude/
+.planning/
+.remember/
+plans/
+
+# Marketing / release material (kept in the private repo)
+release/
+blogs/
+*_TOKEN.txt
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Testing
+coverage/
+test-results.json
+
+# VitePress
+**/.vitepress/cache
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Lock files (bun only)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

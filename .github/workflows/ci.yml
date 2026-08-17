@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build
+        run: bun run build
+
+      - name: Package checks (publint + attw)
+        run: bun run check
+
+      # Hard gate: tests must pass AND coverage must meet the thresholds in
+      # vitest.config.ts (branches >= 90, statements/functions/lines >= 95).
+      - name: Run tests with coverage (enforces 90% branch gate)
+        run: bun run test:coverage
+
+      - name: Run CLI tests
+        run: bun run test:cli
+
+      - name: Update README stats
+        run: bun run test:stats
+
+      - name: Commit updated stats
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --staged --quiet || (git commit -m "docs: update test stats [skip ci]" && git push)
