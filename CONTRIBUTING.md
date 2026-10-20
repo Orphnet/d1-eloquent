@@ -44,7 +44,7 @@ bun run check           # publint + are-the-types-wrong on the built package
   test worker (`wrangler.jsonc` + `@cloudflare/vitest-pool-workers`).
 - **When you fix a bug, add a regression test** that fails before your fix and passes
   after.
-- Coverage gates: statements/functions/lines ≥ 95%, branches ≥ 90%.
+- Coverage gate: 100% statements, branches, functions and lines (enforced by `vitest.config.ts`).
 
 ## Pull requests
 

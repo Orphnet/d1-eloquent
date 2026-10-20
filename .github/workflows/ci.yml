@@ -29,8 +29,8 @@ jobs:
         run: bun run check
 
       # Hard gate: tests must pass AND coverage must meet the thresholds in
-      # vitest.config.ts (branches >= 90, statements/functions/lines >= 95).
-      - name: Run tests with coverage (enforces 90% branch gate)
+      # vitest.config.ts (100% statements, branches, functions and lines).
+      - name: Run tests with coverage (enforces the 100% coverage gate)
         run: bun run test:coverage
 
       - name: Run CLI tests

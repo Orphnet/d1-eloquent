@@ -102,7 +102,7 @@
 
 ## Coverage
 
-Thresholds: statements 95%, branches 90%, functions 95%, lines 95%.
+Thresholds (enforced by `vitest.config.ts`): statements 100%, branches 100%, functions 100%, lines 100%.
 
 | File | Statements | Branches | Functions | Lines |
 |------|-----------|----------|-----------|-------|
